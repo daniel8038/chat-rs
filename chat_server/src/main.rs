@@ -1,5 +1,4 @@
 use anyhow::Result;
-use axum::{routing::get, Router};
 use chat::{config::AppConfig, get_router};
 use tokio::net::TcpListener;
 use tracing::{info, level_filters::LevelFilter};

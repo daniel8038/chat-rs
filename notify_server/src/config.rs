@@ -13,16 +13,15 @@ pub struct ServerConfig {
 }
 impl AppConfig {
     pub fn load() -> Result<Self> {
-        // let reader = File::open("app.yaml")?;
         let ret = match (
-            File::open("app.yaml"),
-            File::open("/etc/config/app.yaml"),
-            env::var("CHAT_CONFIG"),
+            File::open("notify.yml"),
+            File::open("/etc/config/notify.yml"),
+            env::var("NOTIFY_CONFIG"),
         ) {
             (Ok(reader), _, _) => serde_yaml::from_reader(reader),
             (_, Ok(reader), _) => serde_yaml::from_reader(reader),
             (_, _, Ok(path)) => serde_yaml::from_reader(File::open(path)?),
-            _ => bail!("config file not found"),
+            _ => bail!("Config file not found"),
         };
         Ok(ret?)
     }
